@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026期末各章知识点总结 — Java面向对象程序设计</title>
+<style>
+  :root {
+    --bg: #f4f1ed;
+    --card: #ffffff;
+    --text: #2c2c2c;
+    --muted: #6b6b6b;
+    --border: #ddd8cf;
+    --accent: #1d4d70;
+    --hot: #b5342e;
+    --hot-bg: #fef5f4;
+    --ex-bg: #f8f6f3;
+    --ex-border: #e0dbd2;
+    --shadow: 0 1px 3px rgba(0,0,0,.05);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 15px;
+  }
+
+  header {
+    background: #1e2d3a;
+    color: #f0ece6;
+    padding: 36px 24px 28px;
+    text-align: center;
+    border-bottom: 3px solid var(--accent);
+  }
+  header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: .5px;
+  }
+  header .sub {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #a4b5c4;
+    letter-spacing: .3px;
+  }
+
+  .container {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 28px 16px 60px;
+  }
+
+  /* ── Chapter card ── */
+  .chapter {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .chapter-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    background: #fafaf8;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+  .chapter-header .num {
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .chapter-header .title {
+    font-size: 16px;
+    font-weight: 600;
+    flex: 1;
+  }
+  .chapter-header .arrow {
+    font-size: 12px;
+    color: var(--muted);
+    transition: transform .2s;
+  }
+  .chapter.open .chapter-header .arrow { transform: rotate(90deg); }
+
+  .chapter-body {
+    display: none;
+    padding: 18px 20px;
+  }
+  .chapter.open .chapter-body { display: block; }
+
+  /* ── Section ── */
+  .section { margin-bottom: 16px; }
+  .section:last-child { margin-bottom: 0; }
+  .section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px dotted var(--border);
+  }
+
+  /* ── Item ── */
+  .item {
+    padding: 7px 0 5px;
+    font-size: 14px;
+  }
+  .item .label {
+    padding-left: 14px;
+    position: relative;
+    display: block;
+  }
+  .item .label::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 8px;
+    width: 5px; height: 5px;
+    background: #b0b0b0;
+    border-radius: 50%;
+  }
+  .item .explain {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 2px 0 0 14px;
+    display: block;
+  }
+  .item.hot {
+    background: var(--hot-bg);
+    border-radius: 4px;
+    padding: 5px 8px;
+    margin: 2px 0;
+  }
+  .item.hot .label::before { background: var(--hot); }
+
+  /* ── Hot badge ── */
+  .hot-badge {
+    display: inline-block;
+    background: var(--hot);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 1px 8px;
+    border-radius: 3px;
+    margin-left: 6px;
+    vertical-align: middle;
+    letter-spacing: .3px;
+    white-space: nowrap;
+  }
+
+  /* ── Inline code ── */
+  code {
+    background: #ede9e2;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-family: "Cascadia Code","Fira Code","Consolas",monospace;
+    font-size: 13px;
+    letter-spacing: .2px;
+  }
+
+  /* ── Example block ── */
+  .ex-block {
+    margin: 6px 0 4px 14px;
+    background: var(--ex-bg);
+    border: 1px solid var(--ex-border);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .ex-block summary {
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 6px 12px;
+    user-select: none;
+    letter-spacing: .3px;
+  }
+  .ex-block pre {
+    margin: 0;
+    padding: 10px 14px;
+    font-family: "Cascadia Code","Fira Code","Consolas",monospace;
+    font-size: 12.5px;
+    line-height: 1.55;
+    background: #fdfcf9;
+    border-top: 1px solid var(--ex-border);
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  /* ── Toolbar ── */
+  .toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 14px;
+    gap: 8px;
+  }
+  .toolbar button {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 6px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--accent);
+    font-weight: 500;
+    transition: background .15s;
+  }
+  .toolbar button:hover { background: #eef3f8; }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 20px; }
+    .chapter-header { padding: 12px 14px; }
+    .chapter-body { padding: 14px 12px; }
+    .ex-block pre { font-size: 11.5px; padding: 8px 10px; }
+  }
+
+  @media print {
+    body { background:#fff; }
+    header { background:#fff; color:#000; border-bottom:2px solid #000; }
+    .chapter-body { display:block !important; }
+    .toolbar { display:none; }
+    .chapter { break-inside:avoid; box-shadow:none; border:1px solid #ccc; }
+    .ex-block pre { white-space: pre-wrap; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>2026期末各章知识点总结</h1>
+  <div class="sub">Java 面向对象程序设计 &middot; 常考知识点梳理 &middot; 附示例</div>
+</header>
+
+<div class="container">
+
+<div class="toolbar">
+  <button onclick="expandAll()">全部展开</button>
+  <button onclick="collapseAll()">全部折叠</button>
+</div>
+
+<!-- ═══════════════ 第1章 ═══════════════ -->
+<div class="chapter open" id="ch1">
+  <div class="chapter-header" onclick="toggleChapter('ch1')">
+    <span class="num">1</span>
+    <span class="title">Java 概述</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <div class="section-title">Java 语言特性</div>
+      <div class="item">
+        <span class="label">面向对象 — 所有代码均以类和对象组织，天然支持封装、继承、多态</span>
+        <span class="explain">Java 是一种纯粹的面向对象语言（除基本类型外），一切皆为对象。</span>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>平台无关性</strong> — 一次编译，到处运行（Write Once, Run Anywhere）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">Java 源文件经 javac 编译为与平台无关的字节码（.class），由各平台 JVM 解释执行。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>// Hello.java — 在任何操作系统上均可运行
+public class Hello {
+    public static void main(String[] args) {
+        System.out.println("Hello, Java!");
+    }
+}
+// javac Hello.java   → 生成 Hello.class
+// java Hello          → JVM 加载字节码执行</pre></details>
+      </div>
+      <div class="item">
+        <span class="label">健壮性 — 强类型检查、异常处理机制和自动垃圾回收（GC）减少内存泄漏</span>
+        <span class="explain">Java 编译器进行严格的类型检查，运行时 JVM 自动回收不再使用的对象内存。</span>
+      </div>
+      <div class="item">
+        <span class="label">安全性 — 字节码校验器、类加载器沙箱、无指针操作防止内存越界</span>
+        <span class="explain">Java 去掉了 C/C++ 中危险的指针，不允许直接操作内存地址。</span>
+      </div>
+      <div class="item">
+        <span class="label">多线程 — 语言级别内置线程支持，简化并发编程</span>
+        <span class="explain"><code>java.lang.Thread</code> 类和 <code>Runnable</code> 接口提供开箱即用的多线程能力。</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">JVM / JRE / JDK 三者关系</div>
+      <div class="item hot">
+        <span class="label"><strong>JDK</strong>（Java Development Kit）= JRE + 开发工具（javac, java, jar, javadoc 等）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">面向开发者，包含编译器和调试工具，是开发 Java 程序的必备套件。</span>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>JRE</strong>（Java Runtime Environment）= JVM + 核心类库（rt.jar 等）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">仅用于运行 Java 程序，不含编译工具；普通用户只需安装 JRE 即可运行 .class / .jar。</span>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>JVM</strong>（Java Virtual Machine）— 加载字节码并解释/即时编译执行<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">JVM 是 Java 跨平台的核心，包含类加载器、执行引擎、运行时数据区（堆/栈/方法区）。</span>
+        <details class="ex-block"><summary>▶ 示意图</summary><pre>  .java 源文件
+      │  javac (JDK 提供)
+      ▼
+  .class 字节码  ← 与平台无关
+      │
+      ▼
+  ┌─────────────────┐
+  │       JVM        │  ← 与平台相关（Windows/Linux/macOS 各自实现）
+  │  类加载 → 字节码  │
+  │  校验 → 解释/JIT  │
+  │  执行 + GC        │
+  └─────────────────┘</pre></details>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">编译与运行流程</div>
+      <div class="item hot">
+        <span class="label"><code>javac Xxx.java</code> → 生成 <code>Xxx.class</code> 字节码 → <code>java Xxx</code> 由 JVM 执行<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">编译期只检查语法、生成字节码；运行时 JVM 执行字节码（解释 + JIT 热点编译），一个 <code>.java</code> 文件中最多一个 public 类且类名与文件名相同。</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ 第2章 ═══════════════ -->
+<div class="chapter open" id="ch2">
+  <div class="chapter-header" onclick="toggleChapter('ch2')">
+    <span class="num">2</span>
+    <span class="title">Java 语法基础</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <div class="section-title">基本数据类型（8种）</div>
+      <div class="item hot">
+        <span class="label"><strong>整数类型：</strong><code>byte</code>(1B, -128~127) &nbsp; <code>short</code>(2B) &nbsp; <code>int</code>(4B, 默认) &nbsp; <code>long</code>(8B, 需加 L/l)<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">整数字面量默认为 int 类型；long 类型必须加后缀 L，否则可能编译错误。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>byte b = 127;
+int  i = 100;
+long l = 100L;        // 必须加 L，否则 100 默认为 int
+long l2 = 2147483648L; // 超出 int 范围，必须加 L</pre></details>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>浮点类型：</strong><code>float</code>(4B, 后缀 F/f) &nbsp; <code>double</code>(8B, 默认)<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">浮点数字面量默认为 double；float 声明必须加 F 后缀。<code>0.1+0.2 != 0.3</code>（二进制无法精确表示某些十进制小数）。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>double d = 3.14;       // OK，默认为 double
+float  f = 3.14F;      // 必须加 F
+float  f2 = 3.14;      // 编译错误！3.14 默认为 double
+
+System.out.println(0.1 + 0.2); // 0.30000000000000004</pre></details>
+      </div>
+      <div class="item">
+        <span class="label"><strong>字符型：</strong><code>char</code>(2B)，采用 Unicode 编码（\u0000 ~ \uffff）</span>
+        <span class="explain">Java 的 char 占 2 字节，支持中文字符；可以赋值 Unicode 转义序列 <code>char c = '\u4e2d';</code>。</span>
+      </div>
+      <div class="item">
+        <span class="label"><strong>布尔型：</strong><code>boolean</code>，取值 true / false，与 int 不互通</span>
+        <span class="explain">与 C 语言不同，Java 中 boolean 不能和整数互转。<code>if (1) {}</code> 在 Java 中编译错误。</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">类型转换</div>
+      <div class="item hot">
+        <span class="label"><strong>自动类型转换（隐式）：</strong>小范围→大范围（byte→short→int→long→float→double）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">byte 和 short 之间不能自动转换；char 和 short 虽然都是 2B 但不能自动互转。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>int  a = 100;
+long b = a;      // 自动转换 int→long，安全
+double c = a;    // 自动转换 int→double
+
+byte d = 10;
+// short e = d;  // 编译错误！byte→short 不能自动转
+short e = (short) d; // 显式强转</pre></details>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>强制类型转换（显式）：</strong>大范围→小范围，可能丢失精度或溢出<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">格式：<code>(目标类型)值</code>。浮点转整数直接截断小数（非四舍五入）；大整数转小整数可能溢出。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>double pi = 3.14159;
+int    n  = (int) pi;  // 3（截断，非四舍五入）
+
+int  big = 300;
+byte small = (byte) big; // 44（溢出：300-256=44）
+
+char c = 'A';
+int  code = c;          // 65（char→int 自动提升）</pre></details>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">运算符</div>
+      <div class="item hot">
+        <span class="label">算术：<code>+ - * / % ++ --</code>；整数除法截断小数部分，<code>%</code> 可对浮点数取余<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">整数 / 整数 = 整数（向下截断）；两个操作数中有一个是浮点数则结果是浮点数。<code>++i</code> 先加后用，<code>i++</code> 先用后加。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>System.out.println(5 / 2);    // 2（整数截断）
+System.out.println(5.0 / 2);  // 2.5
+
+int a = 1;
+int b = a++;  // b=1, a=2（先用后加）
+int c = ++a;  // c=3, a=3（先加后用）</pre></details>
+      </div>
+      <div class="item hot">
+        <span class="label">关系运算符：<code>== != &gt; &lt; &gt;= &lt;=</code>；<code>==</code> 比较基本类型值/引用地址，<code>equals()</code> 比较内容<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">对于引用类型，<code>==</code> 判断是否指向同一对象；<code>equals()</code> 需重写才能比较内容。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>String s1 = new String("abc");
+String s2 = new String("abc");
+System.out.println(s1 == s2);        // false（不同对象）
+System.out.println(s1.equals(s2));   // true（String 已重写 equals）</pre></details>
+      </div>
+      <div class="item hot">
+        <span class="label">逻辑运算符：<code>&amp;&amp; || !</code>；短路运算 — &amp;&amp; 左侧 false 则不执行右侧，|| 左侧 true 则不执行右侧<span class="hot-badge">常考知识点</span></span>
+        <span class="explain"><code>&amp;</code> 和 <code>|</code> 不短路，两侧都会求值。短路运算常用于避免空指针和提升性能。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>int x = 0;
+if (false && (++x > 0)) {}   // && 短路，++x 未执行
+System.out.println(x);       // 0
+
+String s = null;
+if (s != null && s.length() > 0) {} // 安全，不会 NPE</pre></details>
+      </div>
+      <div class="item">
+        <span class="label">位运算：<code>&amp; | ^ ~ &lt;&lt; &gt;&gt; &gt;&gt;&gt;</code>（无符号右移）</span>
+        <span class="explain"><code>&gt;&gt;2</code> 相当于除以 4；<code>&lt;&lt;2</code> 相当于乘以 4。常用于底层位操作和高效运算。</span>
+      </div>
+      <div class="item">
+        <span class="label">三元运算符：<code>条件 ? 表达式1 : 表达式2</code></span>
+        <span class="explain">三元运算符的类型由两个表达式的类型自动推断（取最近的公共父类型）。</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">流程控制</div>
+      <div class="item">
+        <span class="label"><code>if / else if / else</code> 多分支结构</span>
+        <span class="explain">条件必须是 boolean 类型，不能像 C 那样直接写整数。</span>
+      </div>
+      <div class="item hot">
+        <span class="label"><code>switch</code> — 支持 byte/short/int/char/String/enum；每个 case 需 break，否则发生<strong>穿透</strong><span class="hot-badge">常考知识点</span></span>
+        <span class="explain">Java 7+ 支持 String；Java 14+ 支持箭头语法和 yield。若不写 break，会一直执行到遇到 break 或 switch 结束。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>int day = 2;
+switch (day) {
+    case 1: System.out.println("周一"); break;
+    case 2:
+    case 3: System.out.println("周二或周三"); break; // 穿透用法
+    default: System.out.println("其他");
+}</pre></details>
+      </div>
+      <div class="item">
+        <span class="label">循环：<code>for / while / do-while</code>；<code>break</code> 跳出最内层循环，<code>continue</code> 跳过本次迭代</span>
+        <span class="explain">do-while 至少执行一次循环体；带标签的 break/continue 可以跳出指定层。</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">数组</div>
+      <div class="item hot">
+        <span class="label">声明：<code>int[] arr;</code> 或 <code>int arr[];</code>；初始化：<code>new int[5]</code> 或 <code>{1,2,3}</code><span class="hot-badge">常考知识点</span></span>
+        <span class="explain">数组一旦创建长度不可变；新数组元素有默认值（int→0, 引用→null, boolean→false）。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>int[] a = new int[5];       // 每个元素默认 0
+int[] b = {1, 2, 3, 4, 5};  // 静态初始化
+int[][] c = new int[3][4];  // 二维数组
+System.out.println(a.length); // 5</pre></details>
+      </div>
+      <div class="item hot">
+        <span class="label">增强 for 循环（foreach）：<code>for (类型 变量 : 数组或集合) { }</code><span class="hot-badge">常考知识点</span></span>
+        <span class="explain">遍历期间不能修改数组/集合结构；适用于只读遍历。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>int[] nums = {1, 2, 3, 4, 5};
+for (int n : nums) {
+    System.out.println(n);
+}</pre></details>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ 第3章 ═══════════════ -->
+<div class="chapter open" id="ch3">
+  <div class="chapter-header" onclick="toggleChapter('ch3')">
+    <span class="num">3</span>
+    <span class="title">面向对象基础</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <div class="section-title">类与对象</div>
+      <div class="item hot">
+        <span class="label"><strong>类</strong>是对象的模板/蓝图；<strong>对象</strong>是类的实例化结果<span class="hot-badge">常考知识点</span></span>
+        <span class="explain"><code>new</code> 关键字在堆内存中为对象分配空间，调用构造方法初始化，返回引用。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>class Dog {
+    String name;   // 成员变量（实例变量）
+    int age;
+
+    void bark() {  // 成员方法
+        System.out.println(name + " 叫了一声");
+    }
+}
+
+// 创建对象
+Dog d = new Dog();
+d.name = "旺财";
+d.bark();</pre></details>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">封装（Encapsulation）</div>
+      <div class="item hot">
+        <span class="label"><code>private</code> 修饰成员变量，通过 public <code>getter/setter</code> 方法访问，保护数据<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">封装隐藏实现细节，防止外部直接修改导致非法状态，便于后续修改内部实现而不影响调用方。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>class Student {
+    private String name;
+    private int age;
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public int getAge() { return age; }
+    public void setAge(int age) {
+        if (age > 0 && age < 150) this.age = age;
+    }
+}</pre></details>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">构造方法</div>
+      <div class="item hot">
+        <span class="label">与类同名，无返回值类型（连 void 都不写）；<code>new</code> 时自动调用<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">若未定义任何构造方法，编译器自动生成无参默认构造方法；一旦自定义构造方法，默认构造方法消失。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>class Person {
+    String name;
+    Person(String n) { name = n; }       // 有参构造
+    Person() { this("未命名"); }          // 调用上面那个
+}
+Person p1 = new Person("张三");
+Person p2 = new Person();  // 输出"未命名"</pre></details>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>构造方法重载：</strong>多个构造方法参数列表不同；<code>this(...)</code> 调用本类其他构造方法（必须首行）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">通过 this() 可以复用构造逻辑，减少代码重复。</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">继承（Inheritance）</div>
+      <div class="item hot">
+        <span class="label"><code>extends</code> 关键字；Java 单继承（一个类只能有一个直接父类），可多层继承<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">子类继承父类所有非 private 成员（构造方法除外）。Object 是所有类的根父类。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>class Animal {
+    String name;
+    void eat() { System.out.println("eat..."); }
+}
+
+class Cat extends Animal {
+    void meow() { System.out.println("meow~~"); }
+}
+
+Cat c = new Cat();
+c.name = "Kitty";  // 继承自 Animal
+c.eat();           // 继承自 Animal
+c.meow();          // Cat 自有</pre></details>
+      </div>
+      <div class="item hot">
+        <span class="label"><code>super</code> — 调用父类构造方法（<code>super()</code> 须为首行）、访问父类被覆盖的方法/变量<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">任何构造方法的第一行默认自动调用 <code>super()</code>（除非显式写了 this() 或 super()）。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>class Parent {
+    Parent(String s) { System.out.println("Parent: " + s); }
+}
+class Child extends Parent {
+    Child() {
+        super("hello"); // 必须首行显式调用父类有参构造
+        System.out.println("Child");
+    }
+}</pre></details>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">多态（Polymorphism）</div>
+      <div class="item hot">
+        <span class="label"><strong>方法重载（Overload）：</strong>同类中方法名同，参数列表不同（个数/类型/顺序）— 编译时多态<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">返回值类型不算重载条件；编译器根据调用时的实参类型决定调用哪个版本。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>class Calc {
+    int add(int a, int b)       { return a + b; }
+    double add(double a, double b) { return a + b; }
+    int add(int a, int b, int c){ return a + b + c; }
+}</pre></details>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>方法重写（Override）：</strong>子类重新定义父类方法，签名相同，访问权限不能更窄，不能抛更宽异常 — 运行时多态（动态绑定）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">JVM 根据实际对象类型（而非引用类型）决定调用哪个方法；<code>@Override</code> 注解帮助编译器检查。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>class Animal {
+    void sound() { System.out.println("动物叫"); }
+}
+class Dog extends Animal {
+    @Override
+    void sound() { System.out.println("汪汪"); }
+}
+Animal a = new Dog();
+a.sound();  // 输出 "汪汪" — 动态绑定到 Dog.sound()</pre></details>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>向上转型：</strong><code>父类 引用 = new 子类();</code> — 编译看左边，运行看右边<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">向上转型后只能调用父类定义的方法，实际执行的是子类重写的方法。向下转型需 <code>instanceof</code> 判断。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>Animal a = new Dog();   // 向上转型（自动）
+a.sound();              // 运行 Dog 的 sound()
+// a.wagTail();         // 编译错误！Animal 没有 wagTail
+
+if (a instanceof Dog) {
+    Dog d = (Dog) a;    // 向下转型（强制）
+    d.wagTail();        // 现在可以调用
+}</pre></details>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">关键字</div>
+      <div class="item hot">
+        <span class="label"><code>this</code> — 引用当前对象；区分成员变量和局部变量；<code>this(...)</code> 调用本类构造方法<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">在 setter 中最常见：<code>this.name = name;</code> 左边是成员变量，右边是参数。</span>
+      </div>
+      <div class="item hot">
+        <span class="label"><code>static</code> — 类级别成员，随类加载而初始化，所有实例共享；静态方法不能直接访问非静态成员<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">静态方法中不能使用 this；静态代码块在类加载时执行一次。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>class Counter {
+    static int count = 0;    // 类变量
+    int id;                   // 实例变量
+    Counter() { id = ++count; }
+    static void showCount() { // 静态方法
+        System.out.println(count);
+        // System.out.println(id); // 错误！不能访问实例变量
+    }
+}</pre></details>
+      </div>
+      <div class="item hot">
+        <span class="label"><code>final</code> — 修饰类（不可继承）、修饰方法（不可重写）、修饰变量（常量，不可修改）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">final 引用变量不可指向其他对象，但对象内部状态可以改变（除非对象本身不可变如 String）。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>final int MAX = 100;         // 常量
+final List<String> list = new ArrayList<>();
+list.add("a");               // OK，改变内容而非引用
+// list = new ArrayList<>(); // 错误！不能重新赋值引用</pre></details>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">访问修饰符</div>
+      <div class="item hot">
+        <span class="label"><code>private</code>（本类）→ <code>default</code>/不写（同包）→ <code>protected</code>（同包+子类）→ <code>public</code>（所有）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">访问权限从窄到宽递增；protected 的子类访问指通过继承访问，非简单 new 一个父类对象。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>class A {
+    private   int a;  // 仅 A 内部
+              int b;  // 同包可见（default）
+    protected int c;  // 同包 + 子类
+    public    int d;  // 全部可见
+}</pre></details>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ 第4章 ═══════════════ -->
+<div class="chapter open" id="ch4">
+  <div class="chapter-header" onclick="toggleChapter('ch4')">
+    <span class="num">4</span>
+    <span class="title">面向对象高级技术</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <div class="section-title">抽象类与接口</div>
+      <div class="item hot">
+        <span class="label"><strong>抽象类：</strong><code>abstract class</code>，可含抽象方法和具体方法；有构造方法但不能 new 实例化<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">抽象类用于抽取子类的公共属性和行为；子类不重写全部抽象方法则自己也必须是抽象类。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>abstract class Shape {
+    String color;
+    Shape(String c) { this.color = c; }
+    abstract double area();       // 抽象方法无方法体
+    void show() { System.out.println(color); } // 普通方法
+}
+
+class Circle extends Shape {
+    double r;
+    Circle(String c, double r) { super(c); this.r = r; }
+    double area() { return Math.PI * r * r; } // 必须实现
+}</pre></details>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>接口：</strong><code>interface</code>，方法默认 public abstract；Java 8+ 支持 default/static 方法；Java 9+ 支持 private 方法<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">接口中的变量默认 public static final；一个类可以实现多个接口（<code>implements A, B</code>），弥补单继承限制。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>interface Flyable {
+    void fly();                    // 抽象方法
+    default void land() {          // Java 8 default 方法
+        System.out.println("着陆");
+    }
+}
+
+class Bird implements Flyable {
+    public void fly() { System.out.println("鸟在飞"); }
+}
+
+Bird b = new Bird();
+b.fly();   // "鸟在飞"
+b.land();  // "着陆" — 继承 default 方法</pre></details>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>抽象类 vs 接口：</strong>抽象类是 "is-a" 关系（单继承），接口是 "can-do" 能力（多实现）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">选用原则：需要共享代码选抽象类；需要定义多套行为契约选接口；两者可结合（抽象类实现接口）。</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">内部类</div>
+      <div class="item hot">
+        <span class="label"><strong>成员内部类：</strong>定义在类中，可访问外部类所有成员（包括 private）；<code>Outer.this.xxx</code><span class="hot-badge">常考知识点</span></span>
+        <span class="explain">成员内部类不能有 static 成员（除非 static final 常量）。创建：<code>new Outer().new Inner()</code>。</span>
+      </div>
+      <div class="item">
+        <span class="label">静态内部类 — <code>static class</code>，只能访问外部类静态成员</span>
+        <span class="explain">不依赖外部类实例，创建方式：<code>new Outer.Inner()</code>。</span>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>局部内部类：</strong>定义在方法/代码块内，仅在该作用域内可见，可访问局部变量（须为 final 或 effectively final）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">Java 8+ 局部变量不需要显式 final，但若在内部类中使用则不可重新赋值。</span>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>匿名内部类：</strong><code>new 接口/父类() { ... }</code> — 常用于事件监听和简化一次性实现<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">匿名内部类没有类名，不能有显式构造方法。常被 Lambda 表达式替代（函数式接口场景）。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>// 匿名内部类实现 Runnable
+Runnable r = new Runnable() {
+    public void run() { System.out.println("running"); }
+};
+new Thread(r).start();
+
+// 等价的 Lambda 写法
+Runnable r2 = () -> System.out.println("running");</pre></details>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Lambda 表达式（Java 8+）</div>
+      <div class="item hot">
+        <span class="label">语法：<code>(参数) -&gt; { 语句 }</code>；单条语句可省略 {} 和 return；适用于<strong>函数式接口</strong><span class="hot-badge">常考知识点</span></span>
+        <span class="explain">函数式接口 = 仅含一个抽象方法的接口（如 Runnable, Comparator, Consumer）。<code>@FunctionalInterface</code> 注解标记。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>// Lambda 排序
+List<String> list = Arrays.asList("B", "A", "C");
+list.sort((s1, s2) -> s1.compareTo(s2));  // 省略 {} 和 return
+
+// Lambda 遍历
+list.forEach(s -> System.out.println(s)); // 方法引用更简洁: list.forEach(System.out::println);</pre></details>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">枚举（enum）</div>
+      <div class="item hot">
+        <span class="label"><code>enum</code> 是一种特殊的类，继承自 <code>java.lang.Enum</code>；枚举常量默认 public static final<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">可定义构造方法（必须 private）、成员变量和方法；常用方法：<code>values()</code> 返回所有常量、<code>valueOf(String)</code> 按名称查找。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>enum Season {
+    SPRING("春"), SUMMER("夏"), AUTUMN("秋"), WINTER("冬");
+    private String cn;
+    Season(String cn) { this.cn = cn; }
+    public String getCn() { return cn; }
+}
+for (Season s : Season.values()) System.out.println(s.getCn());</pre></details>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Object 类核心方法</div>
+      <div class="item hot">
+        <span class="label"><code>equals(Object)</code> — 默认比较引用地址（同 ==），需重写以比较内容<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">重写 equals 必须同时重写 hashCode：相等的对象必须有相等的哈希值。</span>
+      </div>
+      <div class="item hot">
+        <span class="label"><code>hashCode()</code> — 返回哈希值；若两个对象 equals 为 true，则 hashCode 必须相等（反之不要求）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">HashMap/HashSet 依赖 hashCode 定位桶位置，再用 equals 判断重复。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>class Person {
+    String name; int age;
+    @Override public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
+        Person p = (Person) o;
+        return age == p.age && Objects.equals(name, p.name);
+    }
+    @Override public int hashCode() {
+        return Objects.hash(name, age);
+    }
+    @Override public String toString() {
+        return name + "(" + age + ")";
+    }
+}</pre></details>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ 第5章 ═══════════════ -->
+<div class="chapter open" id="ch5">
+  <div class="chapter-header" onclick="toggleChapter('ch5')">
+    <span class="num">5</span>
+    <span class="title">Java API</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <div class="section-title">字符串处理</div>
+      <div class="item hot">
+        <span class="label"><strong>String：</strong>不可变字符序列；每次"修改"都创建新对象；频繁拼接用 StringBuilder/StringBuffer 避免性能问题<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">字符串常量池：字面量创建的 String 可能复用同一对象；<code>new String()</code> 一定创建新对象。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>String s1 = "abc";               // 放入常量池
+String s2 = "abc";               // 指向同一常量池对象
+System.out.println(s1 == s2);   // true
+
+String s3 = new String("abc");  // 堆中新对象
+System.out.println(s1 == s3);   // false
+
+// 高效拼接
+StringBuilder sb = new StringBuilder();
+for (int i = 0; i < 100; i++) sb.append(i);
+String result = sb.toString();</pre></details>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>StringBuilder vs StringBuffer：</strong>Builder 线程不安全但更快；Buffer 方法用 synchronized 保证线程安全<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">单线程环境优先用 StringBuilder；多线程共享字符串缓冲时用 StringBuffer。</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">包装类（Wrapper）</div>
+      <div class="item hot">
+        <span class="label">8种基本类型对应包装类：<code>Byte Short Integer Long Float Double Character Boolean</code><span class="hot-badge">常考知识点</span></span>
+        <span class="explain">包装类提供类型转换方法（如 parseInt）、缓存机制（Integer 缓存 -128~127）、以及 equals 比较。</span>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>自动装箱/拆箱（Java 5+）：</strong>编译器自动在基本类型和包装类间转换<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">装箱：<code>Integer i = 100;</code> 实际编译为 <code>Integer.valueOf(100);</code>。拆箱：<code>int n = i;</code> 实际编译为 <code>i.intValue();</code>。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>Integer a = 100;      // 自动装箱 → Integer.valueOf(100)
+int     b = a;        // 自动拆箱 → a.intValue()
+
+Integer x = 128;
+Integer y = 128;
+System.out.println(x == y);     // false（超出缓存范围）
+System.out.println(x.equals(y)); // true（推荐比较方式）</pre></details>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">集合框架</div>
+      <div class="item hot">
+        <span class="label"><strong>Collection 接口：</strong>List（有序可重复）、Set（无序不可重复）、Queue（队列）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">Map 不继承 Collection，是独立的键值对体系。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>// List — 有序可重复
+List<String> list = new ArrayList<>();
+list.add("A"); list.add("B"); list.add("A"); // [A, B, A]
+
+// Set — 无序不重复
+Set<String> set = new HashSet<>();
+set.add("A"); set.add("B"); set.add("A");   // [A, B]
+
+// Map — 键值对
+Map<String, Integer> map = new HashMap<>();
+map.put("apple", 3);
+map.put("banana", 5);
+System.out.println(map.get("apple"));  // 3</pre></details>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>List：</strong><code>ArrayList</code>（数组实现，O(1)随机访问，尾部增删快）vs <code>LinkedList</code>（双向链表，头尾增删快）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">ArrayList 默认容量 10，扩容为 1.5 倍；LinkedList 实现了 Deque 接口可作双端队列。</span>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>Map：</strong><code>HashMap</code>（散列表，O(1)查找，允许 null 键/值）<code>TreeMap</code>（红黑树，按 Key 排序）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">HashMap 默认容量 16、负载因子 0.75，链表超 8 且数组超 64 时转红黑树。Hashtable 是旧版线程安全 Map（不允许 null，性能差）。</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">泛型（Generics）</div>
+      <div class="item hot">
+        <span class="label">编译时类型安全检查；<code>List&lt;String&gt; list = new ArrayList&lt;&gt;();</code>（菱形语法，Java 7+）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">类型擦除：泛型信息仅存在于编译期，运行时被擦除为原始类型（如 List&lt;String&gt; → List）。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>// 泛型类
+class Box<T> {
+    private T item;
+    public void set(T item) { this.item = item; }
+    public T get() { return item; }
+}
+Box<String> b = new Box<>();
+b.set("hello");
+String s = b.get();  // 无需强转，编译期保证类型安全</pre></details>
+      </div>
+      <div class="item">
+        <span class="label">通配符：<code>?</code> 任意类型；<code>? extends T</code> 上界（生产者，可读不可写）；<code>? super T</code> 下界（消费者，可写不可读）</span>
+        <span class="explain">PECS 原则 — Producer Extends, Consumer Super。</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ 第6章 ═══════════════ -->
+<div class="chapter open" id="ch6">
+  <div class="chapter-header" onclick="toggleChapter('ch6')">
+    <span class="num">6</span>
+    <span class="title">异常处理机制</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <div class="section-title">异常体系</div>
+      <div class="item hot">
+        <span class="label"><code>Throwable</code> 是所有异常和错误的父类，分两支：<code>Error</code>（系统级，不处理）和 <code>Exception</code>（程序级，需处理）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">Error 如 OutOfMemoryError、StackOverflowError — 程序不应捕获，无法恢复。</span>
+        <details class="ex-block"><summary>▶ 简化层次</summary><pre>Throwable
+ ├── Error        （系统错误，不处理）
+ └── Exception    （程序异常，需处理）
+       ├── RuntimeException  （非受检异常/运行时异常）
+       └── 其他 Exception     （受检异常）</pre></details>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>受检异常（Checked）：</strong>编译时必须处理（try-catch 或 throws），如 <code>IOException</code>、<code>SQLException</code><span class="hot-badge">常考知识点</span></span>
+        <span class="explain">继承自 Exception 但不继承 RuntimeException 的异常；不处理则编译器报错。</span>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>运行时异常（Unchecked）：</strong><code>RuntimeException</code> 子类，编译不强制处理，如 <code>NullPointerException</code>、<code>ArrayIndexOutOfBoundsException</code><span class="hot-badge">常考知识点</span></span>
+        <span class="explain">通常由程序逻辑错误引起，应通过代码检查避免而非用 try-catch 掩盖。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>// Checked: 必须处理
+try {
+    FileReader fr = new FileReader("a.txt"); // FileNotFoundException
+} catch (IOException e) {
+    e.printStackTrace();
+}
+
+// Unchecked: 可处理也可不处理，但建议避免
+int[] arr = {1, 2, 3};
+// System.out.println(arr[5]); // ArrayIndexOutOfBoundsException</pre></details>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">异常处理语句</div>
+      <div class="item hot">
+        <span class="label"><code>try-catch-finally</code> — finally 块无论如何都会执行（除非 System.exit() 或 JVM 崩溃）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">多个 catch 时子类异常在前、父类在后（否则编译错误）；finally 常用于释放资源。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>try {
+    int result = 10 / 0;
+} catch (ArithmeticException e) {
+    System.out.println("除以零");
+} catch (Exception e) {
+    System.out.println("其他异常");
+} finally {
+    System.out.println("一定会执行"); // 资源释放
+}</pre></details>
+      </div>
+      <div class="item hot">
+        <span class="label"><code>throw</code> — 手动抛出异常对象；<code>throws</code> — 方法声明可能抛出的异常类型（甩锅给调用者）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">throw 用在方法体内；throws 用在方法签名上。子类重写方法不能抛出比父类更宽的受检异常。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>void checkAge(int age) throws Exception {
+    if (age < 0) {
+        throw new Exception("年龄不能为负");
+    }
+}
+
+// 调用者必须处理或继续 throws
+try {
+    checkAge(-1);
+} catch (Exception e) {
+    System.out.println(e.getMessage());
+}</pre></details>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>try-with-resources</strong>（Java 7+）：自动关闭实现 <code>AutoCloseable</code> 的资源，无需显式 finally<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">资源在 try 块结束后自动调用 close()，即使发生异常也会关闭。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>try (FileReader fr = new FileReader("a.txt");
+     BufferedReader br = new BufferedReader(fr)) {
+    String line = br.readLine();
+    System.out.println(line);
+} catch (IOException e) {
+    e.printStackTrace();
+}
+// 自动调用 br.close() 和 fr.close()，无需 finally</pre></details>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">自定义异常</div>
+      <div class="item">
+        <span class="label">继承 <code>Exception</code>（受检异常）或 <code>RuntimeException</code>（运行时异常），提供构造方法即可</span>
+        <span class="explain">通常提供无参构造和带 String message 的构造，调用 super(message)。</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ 第7章 ═══════════════ -->
+<div class="chapter open" id="ch7">
+  <div class="chapter-header" onclick="toggleChapter('ch7')">
+    <span class="num">7</span>
+    <span class="title">Java I/O 流</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <div class="section-title">流的分类</div>
+      <div class="item hot">
+        <span class="label"><strong>按数据单位：</strong>字节流（InputStream/OutputStream，以 byte 为单位）和字符流（Reader/Writer，以 char 为单位）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">字节流适合处理所有类型文件（图片、视频、文本），字符流专用于文本，会自动处理字符编码。</span>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>按方向：</strong>输入流（从源读取到程序）和输出流（从程序写入到目标）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">"输入/输出"是站在程序角度：读入 = 输入，写出 = 输出。</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">File 类</div>
+      <div class="item hot">
+        <span class="label">表示文件或目录路径（非文件内容）；常用：<code>exists() createNewFile() mkdir() delete() listFiles() getName()</code><span class="hot-badge">常考知识点</span></span>
+        <span class="explain">File 对象只是路径的抽象表示，创建 File 对象并不会在磁盘上创建实际文件。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>File f = new File("C:/test/demo.txt");
+System.out.println(f.exists());    // false（文件不存在）
+System.out.println(f.getName());   // "demo.txt"
+System.out.println(f.getParent()); // "C:\test"
+
+// 遍历目录
+File dir = new File("C:/test");
+for (File child : dir.listFiles()) {
+    System.out.println(child.getName());
+}</pre></details>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">常用流类</div>
+      <div class="item hot">
+        <span class="label"><strong>字节流：</strong><code>FileInputStream / FileOutputStream</code> — 基础文件读写，以一字节为单位<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">字节流可以操作任意类型文件（图片、音频等）。通常配合 Buffered 包装提高效率。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>// 字节流复制文件
+try (FileInputStream  in  = new FileInputStream("src.jpg");
+     FileOutputStream out = new FileOutputStream("dst.jpg")) {
+    byte[] buf = new byte[1024];
+    int len;
+    while ((len = in.read(buf)) != -1) {
+        out.write(buf, 0, len);
+    }
+} catch (IOException e) { e.printStackTrace(); }</pre></details>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>字符流：</strong><code>FileReader / FileWriter</code> — 文本文件读写；<code>BufferedReader / BufferedWriter</code> — 缓冲包装，提供 <code>readLine()</code><span class="hot-badge">常考知识点</span></span>
+        <span class="explain">FileReader/FileWriter 使用系统默认编码；指定编码需用 InputStreamReader/OutputStreamWriter 包装。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>// 字符缓冲流读取文本
+try (BufferedReader br = new BufferedReader(new FileReader("a.txt"))) {
+    String line;
+    while ((line = br.readLine()) != null) {
+        System.out.println(line);
+    }
+}
+
+// 指定 UTF-8 编码
+try (BufferedReader br = new BufferedReader(
+        new InputStreamReader(new FileInputStream("a.txt"), "UTF-8"))) {
+    // ...
+}</pre></details>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">对象序列化</div>
+      <div class="item hot">
+        <span class="label">实现 <code>Serializable</code> 接口（标记接口，无方法）；<code>transient</code> 关键字排除不需要序列化的字段<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">序列化 = 将对象状态转为字节流；反序列化 = 从字节流恢复对象。<code>serialVersionUID</code> 保证版本兼容。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>class User implements Serializable {
+    private static final long serialVersionUID = 1L;
+    String name;
+    transient String password; // 不会被序列化
+}
+
+// 序列化
+try (ObjectOutputStream oos = new ObjectOutputStream(
+        new FileOutputStream("user.dat"))) {
+    oos.writeObject(new User("admin", "123456"));
+}
+
+// 反序列化
+try (ObjectInputStream ois = new ObjectInputStream(
+        new FileInputStream("user.dat"))) {
+    User u = (User) ois.readObject(); // password 为 null
+}</pre></details>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ 第8章 ═══════════════ -->
+<div class="chapter open" id="ch8">
+  <div class="chapter-header" onclick="toggleChapter('ch8')">
+    <span class="num">8</span>
+    <span class="title">多线程</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <div class="section-title">线程创建方式</div>
+      <div class="item hot">
+        <span class="label"><strong>继承 Thread 类：</strong>重写 <code>run()</code>，调用 <code>start()</code> 启动新线程<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">直接调用 run() 只是普通方法调用，不会创建新线程；start() 让 JVM 调用 run()。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>class MyThread extends Thread {
+    public void run() {
+        System.out.println("线程运行: " + getName());
+    }
+}
+MyThread t = new MyThread();
+t.start();  // 创建新线程并执行 run()
+// t.run(); // 错误！只是普通方法调用</pre></details>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>实现 Runnable 接口：</strong>实现 <code>run()</code>，传入 Thread 构造方法启动（推荐，避免单继承限制）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">Runnable 方式将任务与线程分离，更灵活，可被线程池复用。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>class MyTask implements Runnable {
+    public void run() {
+        System.out.println("任务执行中: " +
+            Thread.currentThread().getName());
+    }
+}
+Thread t = new Thread(new MyTask());
+t.start();
+
+// Java 8 Lambda 简化
+new Thread(() -> System.out.println("Lambda 线程")).start();</pre></details>
+      </div>
+      <div class="item">
+        <span class="label"><strong>实现 Callable 接口：</strong>有返回值、可抛出异常；配合 <code>FutureTask</code> / <code>ExecutorService.submit()</code> 使用</span>
+        <span class="explain">Callable 的 call() 方法返回泛型结果，Future.get() 阻塞等待结果。</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">线程同步</div>
+      <div class="item hot">
+        <span class="label"><code>synchronized</code> — 同步代码块(<code>synchronized(obj){}</code>) 或同步方法；每个对象有一个内置锁（monitor）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">synchronized 实例方法锁的是 this 对象；synchronized 静态方法锁的是 Class 对象。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>class Ticket {
+    private int count = 100;
+    public synchronized void sell() { // 同步方法
+        if (count > 0) {
+            System.out.println("售出1张，剩余" + --count);
+        }
+    }
+    // 等价于:
+    // public void sell() {
+    //     synchronized(this) { if(count>0) ... }
+    // }
+}</pre></details>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>死锁：</strong>多个线程互相等待对方释放锁，形成循环等待<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">避免死锁：统一加锁顺序、设置超时（Lock.tryLock）、避免嵌套锁。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>// 死锁示意（不要这样写！）
+// 线程A: 先锁 obj1，再锁 obj2
+// 线程B: 先锁 obj2，再锁 obj1  → 互相等待
+// 修复方法：两线程都按 obj1→obj2 的顺序加锁</pre></details>
+      </div>
+      <div class="item">
+        <span class="label"><code>wait() / notify() / notifyAll()</code> — Object 的方法，用于线程间等待/唤醒通信，必须在 synchronized 块内调用</span>
+        <span class="explain">wait() 释放锁并等待；notify() 随机唤醒一个等待线程，不释放锁。</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">线程池</div>
+      <div class="item hot">
+        <span class="label"><code>ExecutorService</code> — <code>Executors.newFixedThreadPool(n)</code> 创建固定大小线程池；复用线程避免频繁创建销毁<span class="hot-badge">常考知识点</span></span>
+        <span class="explain"><code>execute(Runnable)</code> 提交无返回值任务；<code>submit(Callable)</code> 返回 Future 可获取结果。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>ExecutorService pool = Executors.newFixedThreadPool(3);
+for (int i = 0; i < 5; i++) {
+    final int taskId = i;
+    pool.execute(() -> {
+        System.out.println("任务" + taskId +
+            " 由 " + Thread.currentThread().getName() + " 执行");
+    });
+}
+pool.shutdown(); // 不再接受新任务，已有任务执行完关闭</pre></details>
+      </div>
+      <div class="item">
+        <span class="label"><code>volatile</code> — 保证变量可见性，一个线程修改后其他线程立即可见；禁止指令重排序</span>
+        <span class="explain">volatile 不保证原子性（如 i++ 仍非线程安全）；适用场景：状态标志位。</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ 第9章 ═══════════════ -->
+<div class="chapter open" id="ch9">
+  <div class="chapter-header" onclick="toggleChapter('ch9')">
+    <span class="num">9</span>
+    <span class="title">Java GUI 编程</span>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="chapter-body">
+
+    <div class="section">
+      <div class="section-title">AWT 与 Swing</div>
+      <div class="item hot">
+        <span class="label"><strong>AWT：</strong>重量级组件，依赖本地平台窗口系统，外观随平台变化；<strong>Swing：</strong>轻量级组件，纯 Java 实现，跨平台外观一致<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">Swing 组件以 J 开头（JFrame, JButton 等），大部分继承自 AWT 的 Container/Component。</span>
+      </div>
+      <div class="item">
+        <span class="label">Swing 常用组件：<code>JFrame JPanel JButton JLabel JTextField JTextArea JComboBox JCheckBox JRadioButton</code></span>
+        <span class="explain">所有 Swing 组件必须在事件分派线程（EDT）上创建：<code>SwingUtilities.invokeLater(() -> { ... });</code>。</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">顶层容器与布局</div>
+      <div class="item hot">
+        <span class="label"><code>JFrame</code> — 顶层窗口；<code>setVisible(true)</code> 显示；<code>setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)</code> 关闭时退出程序<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">JFrame 默认使用 BorderLayout；通常将内容放到 <code>getContentPane()</code> 或直接 add。</span>
+      </div>
+      <div class="item hot">
+        <span class="label"><strong>布局管理器：</strong><code>BorderLayout</code>（东/西/南/北/中5个区域）&nbsp; <code>FlowLayout</code>（从左到右流式排列）&nbsp; <code>GridLayout</code>（M×N网格）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">JPanel 默认 FlowLayout；可通过嵌套多个 JPanel 实现复杂布局；<code>setLayout(null)</code> 可取消布局管理器实现绝对定位（不推荐）。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>JFrame frame = new JFrame("窗口标题");
+frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+frame.setSize(400, 300);
+
+// BorderLayout 示例
+frame.setLayout(new BorderLayout());
+frame.add(new JButton("北"), BorderLayout.NORTH);
+frame.add(new JButton("中"), BorderLayout.CENTER);
+frame.add(new JButton("南"), BorderLayout.SOUTH);
+
+frame.setVisible(true);</pre></details>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">事件处理模型</div>
+      <div class="item hot">
+        <span class="label"><strong>委托事件模型：</strong>事件源（如按钮）→ 生成事件对象（ActionEvent）→ 调用已注册的事件监听器<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">组件只管触发事件，具体处理逻辑委托给监听器，实现关注点分离。</span>
+      </div>
+      <div class="item hot">
+        <span class="label">常用监听器接口：<code>ActionListener</code>（按钮点击等动作）&nbsp; <code>MouseListener</code>（鼠标按下/释放/进入/离开）&nbsp; <code>KeyListener</code>（键盘键入）<span class="hot-badge">常考知识点</span></span>
+        <span class="explain">适配器类（如 MouseAdapter）提供空实现，只需重写关心的方法，避免实现所有接口方法。</span>
+        <details class="ex-block"><summary>▶ 示例</summary><pre>JButton btn = new JButton("点击");
+
+// 方式1：匿名内部类
+btn.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("按钮被点击");
+    }
+});
+
+// 方式2：Lambda（Java 8+，更简洁）
+btn.addActionListener(e -> System.out.println("按钮被点击"));
+
+// 方式3：本类实现 ActionListener 接口
+// class MyFrame implements ActionListener { ... }</pre></details>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<footer>Java 面向对象程序设计 &middot; 2026 期末复习资料</footer>
+
+<script>
+function toggleChapter(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+function expandAll() {
+  document.querySelectorAll('.chapter').forEach(c => c.classList.add('open'));
+}
+function collapseAll() {
+  document.querySelectorAll('.chapter').forEach(c => c.classList.remove('open'));
+}
+</script>
+
+</body>
+</html>
